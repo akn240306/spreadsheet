@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-    long long n, int1 = 0, int2 = 0, tmp = 0, reminder = 0, count2 = 0, int3 = 0, int4 = 0;
+    long long n, int1 = 0, int2 = 0, tmp = 0, count2 = 0, int3 = 0, int4 = 0;
     cin >> n; //số case từng test
     string s[1000]; //dùng string để lưu từng case
     char c[10];
@@ -56,18 +56,11 @@ int main()
                 }
             }
             for (int j = tmp; j >= 0; --j) {    //vòng lặp để đổi từ kí tự sang số
-                if (count2 == 0) { //đọc dòng /* phía dưới trước
-                    reminder = s[i][j] - 'A' + 1;   //reminder để tính số dư khi lấy kí tự biến đổi sang số chia cho 26
-                    ++count2;                       //vd BC23 thì BC biến đổi thành 55 / 26 dư 3 => reminder = 3
-                }                                   //nhưng vì là chuỗi nên t phải làm cồng kềnh nnay
-                else {
-                    int4 = (s[i][j] - 'A' + 1) * 26 * count2; /*đây là cthuc ban đầu t nghĩ ra nma vì vướng cái count2 nên mới phải chia 2 TH count2 */
-                    ++count2;                                  //int4 là kí tự sau khi biến đổi thành số
-                }                                              //vd BC23 thì int4 = 55
+                int4 = int4 + (s[i][j] - 'A' + 1) * pow(26, count2);    //int4 là số sau khi biến đổi từ kí tự
+                ++count2;                                               //vd BC23 thì int4 = 55
             }
-            int4 += reminder;
             cout << "R" << int3 << "C" << int4 << endl;
-            reminder = 0; count2 = 0; int3 = 0; int4 = 0;   //  reset biến
+            count2 = 0; int3 = 0; int4 = 0;   //  reset biến
         }
     }
 }
