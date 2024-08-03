@@ -9,7 +9,7 @@ int main()
 {
     long long n, int1 = 0, int2 = 0, tmp = 0, count2 = 0, int3 = 0, int4 = 0;
     cin >> n; //số case từng test
-    string s[1000]; //dùng string để lưu từng case
+    string s[100000]; //dùng string để lưu từng case
     char c[10];
     for (int i = 0; i < n; ++i) {
         cin >> s[i];
@@ -37,8 +37,14 @@ int main()
             }
             vector<char> v; //tạo vector v để lưu giá trị sau khi biến đổi y sang dạng ABC
             do {
-                v.push_back(int2 % 26 - 1 + 'A');    //đây là đoạn biến đổi theo cthuc như trong note t ghi
-                int2 = int2 / 26;                    //cái v.push_back hiểu đơn giản là nạp ký tự vào sau chuỗi, search gg để hiểu thêm
+                if(int2 % 26 == 0){    //TH chia hết tức kí tự là Z
+                    v.push_back(26 - 1 + 'A');    //cái v.push_back hiểu đơn giản là nạp ký tự vào sau chuỗi, search gg để hiểu thêm
+                    int2 = int2 / 26;
+                    int2 -= 1;
+                }else{
+                    v.push_back(int2 % 26 - 1 + 'A');    //TH còn lại
+                    int2 = int2 / 26;
+                }            
             } while (int2 != 0);
             for (int i = v.size() - 1; i >= 0; --i) {   //vì chuỗi sau khi biến đổi bị ngược nên phải chạy i từ v.size()-1
                 cout << v[i];   //in ra y sau khi bị biến đổi
